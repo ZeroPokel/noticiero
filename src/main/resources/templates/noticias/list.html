@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="commons/header :: header"></head>
+<body>
+    <div th:replace="commons/menu :: menu"></div>
+
+    <!-- CARDS -->
+    <div class="container">
+        <h1>Noticias</h1>
+        <div th:if="${session ne null and session.usuario ne null}">
+            <div th:if="${session.usuario.usuario == 'admin'}">
+                <a th:href="@{/noticias/create}" th:text="#{noticia.crear}" href="create.html" class="btn btn-primary">Crear</a>
+            </div>
+        </div>
+          <div class="row">
+              <table class="table table-striped table-hover">
+                <caption th:text="#{noticia.titulo}">Lista de noticias</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col" th:text="#{noticia.codigo}">Código</th>
+                      <th scope="col" th:text="#{noticia.titular}">Titular</th>
+                      <th scope="col" th:text="#{noticia.descripcion}">Descripción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <div th:each="noticia : ${noticias}" class="col-3">
+                          <tr>
+                              <th scope="row" th:text="${noticia.codigo}"></th>
+                              <td th:text="${noticia.titular}"></td>
+                              <td th:text="${noticia.descripcion}"></td>
+                              <td><a th:if="${session ne null and session.usuario ne null}" th:href="@{/noticias/edit/}+${noticia.codigo}" href="edit.html" class="btn btn-primary bi bi-pen"></a></td>
+                              <td><a th:if="${session ne null and session.usuario ne null}" th:href="@{/noticias/delete/}+${noticia.codigo}" href="list.html" class="btn btn-primary bi bi-trash"></a></td>
+                          </tr>
+                      </div>
+                  </tbody>
+              </table> 
+          </div>
+      </div>
+   
+          <div class="row">
+              <div class="col-12">
+                  <nav aria-label="Page navigation example">
+                      <ul class="pagination justify-content-center">
+                        <li class="page-item"><a class="page-link bi bi-arrow-left" href="#"></a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link bi bi-arrow-right" href="#"></a></li>
+                      </ul>
+                  </nav>
+              </div>
+          </div>
+
+      </div>
+
+    <div th:replace="commons/footer :: footer" class="container"></div>
+
+</body>
+</html>

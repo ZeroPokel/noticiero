@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+  <div th:fragment="menu">
+
+    <!-- MENU PRINCIPAL -->
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#" th:text="#{menu.menu}">Menu</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/noticias/list}" th:text="#{menu.noticias}">Noticias</a>
+              </li>
+            </ul>
+
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                &#127760;
+                </a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" th:href="@{/noticias/list?idioma_setting=es}" th:text="#{menu.espaniol}">Español</a>
+                  <a class="dropdown-item" th:href="@{/noticias/list?idioma_setting=en}" th:text="#{menu.ingles}">Inglés</a>
+                </div>
+              </li>
+            </ul>
+            <div th:if="${session ne null and session.usuario ne null}">
+              <p class="btn btn-outline-success" th:text="${session.usuario.usuario}"></p>
+              <a class="btn btn-outline-success" th:href="@{/noticias/logout}"><i class="bi bi-box-arrow-in-left"></i></a>
+            </div>
+            <div th:unless="${session ne null and session.usuario ne null}">
+              <form class="d-flex" method="post"  th:action="@{/noticias/login}">
+                <input class="form-control me-2" type="text" name="usuario" id="usuario" th:placeholder="#{menu.usuario}">
+                <input class="form-control me-2" type="text" name="password" id="password" th:placeholder="#{menu.pass}">
+                <input type="submit" class="btn btn-outline-success" value="Log in">
+              </form>
+            </div>
+          </div>
+        </div>
+    </nav>
+  </div> 
+</body>
+</html>

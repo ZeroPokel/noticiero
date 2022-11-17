@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="commons/header :: header"></head>
+<body>
+
+    <div th:replace="commons/menu :: menu"></div>
+    <div class="container-fluid">
+        <form class="row g-3" method="post" th:action="@{/noticias/update}">
+            <div class="col-md-4">
+                <label for="codigo" class="form-label" th:text="#{noticia.codigo}">Codigo</label>
+                <input type="text" class="form-control" id="codigo" name="codigo" th:value="${noticia.codigo}" readonly>
+            </div>
+            <div class="col-md-4">
+                <label for="titular" class="form-label" th:text="#{noticia.titular}">Titular</label>
+                <input type="titular" class="form-control" id="titular" name="titular" th:value="${noticia.titular}" >
+            </div>
+            <div class="col-md-4">
+                <label for="descripcion" class="form-label" th:text="#{noticia.descripcion}">Descripcion</label>
+                <input type="text" class="form-control" id="descripcions" name="descripcion" th:value="${noticia.descripcion}" >
+            </div>
+            <div class="col-4">
+                <a th:href="@{/noticias/list}" href="list.html" class="btn btn-primary" th:text="#{noticia.atras}">Cancelar</a>
+                <button class="btn btn-primary" type="submit" th:text="#{noticia.actualizar}">Actualizar</button>
+            </div>
+        </form>
+    </div>
+
+    <div th:replace="commons/footer :: footer" class="container"></div>
+</body>
+</html>
